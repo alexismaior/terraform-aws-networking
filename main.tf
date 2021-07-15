@@ -31,7 +31,7 @@ locals {
       description = "rds access"
       ingress = {
         mysql = {
-          from        = 3307
+          from        = 3306
           to          = 3306
           protocol    = "tcp"
           cidr_blocks = var.public_cidrs
