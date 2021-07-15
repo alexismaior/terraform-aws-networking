@@ -31,10 +31,10 @@ locals {
       description = "rds access"
       ingress = {
         mysql = {
-          from        = 3306
+          from        = 3307
           to          = 3306
           protocol    = "tcp"
-          cidr_blocks = ["10.123.0.0/16"]
+          cidr_blocks = var.public_cidrs
         }
       }
     }
@@ -98,6 +98,9 @@ resource "aws_db_subnet_group" "mtc_rds_subnetgroup" {
   tags = {
     Name = "mtc_rds_sng"
   }
+  lifecycle {
+      create_before_destroy = true
+    }
 }
 
 resource "aws_internet_gateway" "mtc_internet_gateway" {
